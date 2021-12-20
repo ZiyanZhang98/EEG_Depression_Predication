@@ -58,12 +58,12 @@
 \hfill
 \begin{minipage}[c]{0.70\textwidth}
 \centering
-\Huge \color{NavyBlue} \textbf{Title Here}\\[0.5cm]
+\Huge \color{NavyBlue} \textbf{Automated EEG-based major depress disorder detection through deep neural network }\\[0.5cm]
 \large \color{Black} \textbf{Ziyan Zhang$^{1}$, Zhe Cao$^{1}$, Weiqi Ruan$^{1}$}\\[0.2cm] % Author(s)
 \small 1. Institute for Quantum Science and Engineering, SUSTech, Shenzhen, China\\[0.1cm] % University
-\small \texttt{Correspondence: 12132873e@mail.sustech.edu.cn}\\
-\small \texttt{name.lastname@rmit.edu.au}\\
-\small \texttt{name.lastname@rmit.edu.au}\\
+\small \texttt{Correspondence: 12132873@mail.sustech.edu.cn}\\
+\small \texttt{12132834@mail.sustech.edu.cn}\\
+\small \texttt{n1023104572@qq.com}\\
 \end{minipage}
 %\hfill
 \begin{minipage}[c]{0.15\textwidth}
@@ -83,16 +83,16 @@
 %----------------------------------------------------------------------------------------
 \color{Black}
 \section*{Introduction}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum (Fig.-\ref{IGSMap}) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\
+In recent years, deep learning has been extensively used for arbitrary diagnosis of many mental diseases based on EEG or fMRI, including epilepsy$^1$, seizure prediction$^2$, Alzheimer's disease$^3$, etc. Simultaneously, depression is a common illness worldwide, with an estimated 3.8\% of the population affected, including 5.0\% among adults and 5.7\% among adults older than 60 years. Over 700,000 people die due to suicide caused by the depression every year. $^4$  However, it can be effectively diagnosed and treated in early period. A schematic comparison of synapses from a healthy subject and a depressed subject is presented in Fig. 1.\\
 %\begin{wrapfigure}{R}{0.25\textwidth}
 \begin{center}
 \hspace*{\fill}
-\includegraphics[width=0.49\linewidth]{figures/placeholder}
-\includegraphics[trim={0 0.9cm 0 0},clip,width=0.49\linewidth]{figures/placeholder}
-\captionof{figure}{\color{Green}(left) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi \textendash re Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
+\includegraphics[width=0.4\linewidth]{figures/normal_syn}
+\includegraphics[trim={0 0.9cm 0 0},clip,width=0.49\linewidth]{figures/abnormal}
+\captionof{figure}{\color{Green}A schematic comparison of synapses of a healthy subject (left) and a depressed patient (right)$^5$.}
 \label{IGSMap}
 \end{center}
-In this contributionLorem ipsum dolor sit amet, consectetur liquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+In this work, we presented an EEG-based major depress disorder detection neural network based on GPT-3. It takes EEG signal as input and outputs its predication graded with None, Mild, Moderate and Severe based on the severity of symptoms. We trained this network with 128 channels resting signal obtained 24 major depressive disorder subjects and 29 healthy control subjects, ranging from 16 - 52 years old$^6$. This model was tested by various public datasets, the accuracy and f1 score can reach about 0.9. Additionally, we compared our model with other neural networks like CNN, RNN and ResNet-16, we can induct that our model performs better.
 %----------------------------------------------------------------------------------------
 %	METHODS
 %---------------------------------------------------------------------------------------- 
