@@ -58,12 +58,12 @@
 \hfill
 \begin{minipage}[c]{0.70\textwidth}
 \centering
-\Huge \color{NavyBlue} \textbf{Automated EEG-based major depress disorder detection through deep neural network }\\[0.5cm]
+\Huge \color{NavyBlue} \textbf{Automated EEG-based major depress disorder detection through transformer-based network}\\[0.5cm]
 \large \color{Black} \textbf{Ziyan Zhang$^{1}$, Zhe Cao$^{1}$, Weiqi Ruan$^{1}$}\\[0.2cm] % Author(s)
 \small 1. Institute for Quantum Science and Engineering, SUSTech, Shenzhen, China\\[0.1cm] % University
 \small \texttt{Correspondence: 12132873@mail.sustech.edu.cn}\\
 \small \texttt{12132834@mail.sustech.edu.cn}\\
-\small \texttt{n1023104572@qq.com}\\
+\small \texttt{1023104572@qq.com}\\
 \end{minipage}
 %\hfill
 \begin{minipage}[c]{0.15\textwidth}
@@ -92,30 +92,32 @@ In recent years, deep learning has been extensively used for arbitrary diagnosis
 \captionof{figure}{\color{Green}A schematic comparison of synapses of a healthy subject (left) and a depressed patient (right)$^5$.}
 \label{IGSMap}
 \end{center}
-In this work, we presented an EEG-based major depress disorder detection neural network based on GPT-3. It takes EEG signal as input and outputs its predication graded with None, Mild, Moderate and Severe based on the severity of symptoms. We trained this network with 128 channels resting signal obtained 24 major depressive disorder subjects and 29 healthy control subjects, ranging from 16 - 52 years old$^6$. This model was tested by various public datasets, the accuracy and f1 score can reach about 0.9. Additionally, we compared our model with other neural networks like CNN, RNN and ResNet-16, we can induct that our model performs better.
+In this work, we presented an EEG-based major depress disorder detection neural network based on GPT-3. It takes EEG signal as input and outputs its predication graded with None, Mild, Moderate and Severe based on the severity of symptoms. We trained this network with 128 channels resting signal obtained 24 major depressive disorder subjects and 29 healthy control subjects, ranging from 16 - 52 years old$^6$. This model was tested by various public datasets, the accuracy and f1 score can reach about 0.9. Additionally, we compared our network with naive CNN and RNN, we can induct that our model performs better.
 %----------------------------------------------------------------------------------------
 %	METHODS
 %---------------------------------------------------------------------------------------- 
 \color{Black}
 \section*{Data and Methods}
-\begin{wrapfigure}{R}{0.25\textwidth}
-\centering
-\includegraphics[scale=0.5]{figures/placeholder}
+%\begin{wrapfigure}{R}{0.25\textwidth}
+%\centering
+%\end{wrapfigure}
+The data being used in this work is an open-source EEG dataset from UAIS Lab, Lanzhou University, China$^6$. The dataset contains traditional 128-electrodes EEG signals as well as audio data from clinically depressed patients and matching normal controls. The EEG signals of 53 subjects were recorded in resting state \& under stimulation.  \\
+\begin{center}
+\includegraphics{figures/placeholder}
 \captionof{figure}{\color{Green}Loreteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
 \label{STECchart}
-\end{wrapfigure}
-Key information about the sources of data and methods employed in the study are highlighted below.\\
-\hspace{0.1cm}$\circ$ Sdfshd d: 25\textendash31 January, 2015;\\
-\hspace{0.1cm}$\circ$ Redfshdghgons (Fig.\ref{IGSMap}): Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed;\\
-\hspace{0.1cm}$\circ$ Geomagnetic activity: Kp $<$ 4 throughout the study period;\\
-\hspace{0.1cm}$\circ$ Analysis: Two types of accuracy and;\\
-\hspace{0.1cm}$\circ$ GIR: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor;\\
-\hspace{0.1cm}$\circ$ AGD: Lsunt in culpa qui officia deserunt mollit anim id est laborum.\\
-Lorem icia deserunt mollit anim id est laborum:
+\end{center}
+%\hspace{0.1cm}$\circ$ Sdfshd d: 25\textendash31 January, 2015;\\
+%\hspace{0.1cm}$\circ$ Redfshdghgons (Fig.\ref{IGSMap}): Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed;\\
+%\hspace{0.1cm}$\circ$ Geomagnetic activity: Kp $<$ 4 throughout the study period;\\
+%\hspace{0.1cm}$\circ$ Analysis: Two types of accuracy and;\\
+%\hspace{0.1cm}$\circ$ GIR: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor;\\
+%\hspace{0.1cm}$\circ$ AGD: Lsunt in culpa qui officia deserunt mollit anim id est laborum.\\
+The pre-processing of the raw EEG signal contains 3 parts, 
 \begin{enumerate}
-\item fdfjyjghjkghk yfdjfjs;
-\item cyjk gfdj fhfg dstgh dfhfg ion; and
-\item esgjdhj gjdfjhgj jdtyjtyuy  tyjty.
+\item Segmenting
+\item Band-pass filtering
+\item Standarlization
 \end{enumerate}
 As illustrated in Fig.-\ref{STECchart}, Lorem ipsum dolor:\\
 \hspace{0.1cm}$\circ$ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.\\
