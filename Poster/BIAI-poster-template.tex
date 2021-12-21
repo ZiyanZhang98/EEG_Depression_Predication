@@ -119,7 +119,13 @@ The pre-processing of the raw EEG signal contains 3 parts,
 \item Band-pass filtering
 \item Standarlization
 \end{enumerate}
-As illustrated in Fig.-\ref{STECchart}, Lorem ipsum dolor:\\
+The data is segmented into trials as $C_{eeg}*T$, where $C_{eeg}$ is the number of EEG channels and $T$ is the sample points. Then we add band-pass filter data to $[4,40]Hz$ to remove high and low-frequency noise. After that we apply standard normalization to relive the fluctuation and non-stationarity  as $$X={x-\mu}/{\sqrt{\sigma}^2}$$Additionally, we give a feasible way based on CSP usage to improve the difference of the original signal and maintain the temporal information.\\
+\begin {center}
+\includegraphics{figures/dot}
+\captionof{figure}{\color{Green}The calculation process of spatial feature-channel attention}
+\label{dot}
+\end{center}
+We proposed a method of feature channel weighting inspired by the scaled dot-product. As illustrated in Fig.\ref{dot}. \\
 \hspace{0.1cm}$\circ$ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.\\
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed  3\,mm/$\sqrt[]{hour}$. The.
 %----------------------------------------------------------------------------------------
