@@ -92,7 +92,7 @@ In recent years, deep learning has been extensively used for arbitrary diagnosis
 \captionof{figure}{\color{Green}A schematic comparison of synapses of a healthy subject (left) and a depressed patient (right)$^5$.}
 \label{IGSMap}
 \end{center}
-In this work, we presented an EEG-based major depress disorder detection neural network based on GPT-3. It takes EEG signal as input and outputs its predication graded with None, Mild, Moderate and Severe based on the severity of symptoms. We trained this network with 128 channels resting signal obtained 24 major depressive disorder subjects and 29 healthy control subjects, ranging from 16 - 52 years old$^6$. This model was tested by various public datasets, the accuracy and f1 score can reach about 0.9. Additionally, we compared our network with naive CNN and RNN, we can induct that our model performs better.
+In this work, we presented an EEG-based major depress disorder detection neural network based on transformer. It takes EEG signal as input and outputs its predication graded with None, Mild, Moderate and Severe based on the severity of symptoms. We trained this network with 128 channels resting signal obtained 24 major depressive disorder subjects and 29 healthy control subjects, ranging from 16 - 52 years old$^6$. This model was tested by various public datasets, the accuracy and f1 score can reach over 0.8. Additionally, we compared our network with naive CNN and RNN, it can be inducted that our model performs better.
 %----------------------------------------------------------------------------------------
 %	METHODS
 %---------------------------------------------------------------------------------------- 
@@ -103,9 +103,11 @@ In this work, we presented an EEG-based major depress disorder detection neural 
 %\end{wrapfigure}
 The data being used in this work is an open-source EEG dataset from UAIS Lab, Lanzhou University, China$^6$. The dataset contains traditional 128-electrodes EEG signals as well as audio data from clinically depressed patients and matching normal controls. The EEG signals of 53 subjects were recorded in resting state \& under stimulation.  \\
 \begin{center}
-\includegraphics{figures/placeholder}
-\captionof{figure}{\color{Green}Loreteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
-\label{STECchart}
+\hspace*{\fill}
+\includegraphics[width=0.49\linewidth]{figures/mdd}
+\includegraphics[clip,width=0.49\linewidth]{figures/hc}
+\captionof{figure}{\color{Green}Comparison of power spectral densities of WDD(left) and HC(right).}
+\label{IGSMap}
 \end{center}
 %\hspace{0.1cm}$\circ$ Sdfshd d: 25\textendash31 January, 2015;\\
 %\hspace{0.1cm}$\circ$ Redfshdghgons (Fig.\ref{IGSMap}): Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed;\\
@@ -119,39 +121,28 @@ The pre-processing of the raw EEG signal contains 3 parts,
 \item Band-pass filtering
 \item Standarlization
 \end{enumerate}
-The data is segmented into trials as $C_{eeg}*T$, where $C_{eeg}$ is the number of EEG channels and $T$ is the sample points. Then we add band-pass filter data to $[4,40]Hz$ to remove high and low-frequency noise. After that we apply standard normalization to relive the fluctuation and non-stationarity  as $$X={x-\mu}/{\sqrt{\sigma}^2}$$Additionally, we give a feasible way based on CSP usage to improve the difference of the original signal and maintain the temporal information.\\
+The data is segmented into trials as $C_{eeg}*T$, where $C_{eeg}$ is the number of EEG channels and $T$ is the sample points. Then we add band-pass filter data to $[4,40]Hz$ to remove high and low-frequency noise. After that we apply standard normalization to relive the fluctuation and non-stationarity  as $$X={x-\mu}/{\sqrt{\sigma}^2}$$Additionally, we give a feasible way based on CSP usage to improve the difference of the original signal and maintain the temporal information.
 \begin {center}
 \includegraphics{figures/dot}
 \captionof{figure}{\color{Green}The calculation process of spatial feature-channel attention}
 \label{dot}
 \end{center}
-We proposed a method of feature channel weighting inspired by the scaled dot-product. As illustrated in Fig.\ref{dot}. \\
-\hspace{0.1cm}$\circ$ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.\\
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed  3\,mm/$\sqrt[]{hour}$. The.
+We proposed a method of feature channel weighting inspired by the scaled dot-product. As illustrated in Fig.\ref{dot}. The input data is first linearly transformed into vectors, queries($Q$), and keys($K$). The whole process can be expressed as $$Attention(Q, K, V) = \frac{QK^{T}}{d_k}V$$Additionally, we perceiving global temporal dependencies of EEG signals using the attention mechanism. In the beginning, the data is compressed to one dimension $1{\times}T$ to reduce the computational complexity, since the feature channels have been weighted in the previous step. Therefore, we divide the data into multiple slices with a shape of $1{\times}d$ for attention training. After that, we simply apply global average pooling to generate the results. We showed the whole process in Fig.4\\
+\begin {center}
+\includegraphics{figures/process}
+\captionof{figure}{\color{Green}The overall frame of the Spatial-Temporal Transformer}
+\label{process}
+\end{center}
 %----------------------------------------------------------------------------------------
 %	RESULTS
 %---------------------------------------------------------------------------------------- 
 \color{Black}
 \section*{Results}
 Fig.-\ref{BIvar} compares tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-\begin{center}
-\includegraphics[width=0.8\linewidth]{figures/placeholder}
-\captionof{figure}{\color{Green}Cdfhfghgf R (gfhfgh) and GDDDE.}
-\label{BIvar}
-\end{center}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum 705 valid (CT$\neq$0) improvements in CT.
-\begin{center}
-\includegraphics[width=0.9\linewidth]{figures/placeholder}
-\captionof{figure}{\color{Green} Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
-\label{ALICerros}
-\end{center}
+
 Fig.-\ref{ALICerros} illustrates Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-\begin{center}
-\includegraphics[width=0.9\linewidth]{figures/placeholder}
-\captionof{figure}{\color{Green}VLorem ipsum dolor sit amet, ulpa qui officia deserunt mollit anim id est laborumime.}
-\label{GIMupdown}
-\end{center}
 \vspace{0.1cm}
 \begin{center}
 \includegraphics[width=0.9\linewidth]{figures/placeholder}
@@ -163,20 +154,23 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 %----------------------------------------------------------------------------------------
 \color{Black}
 \section*{Summary}
-Two typesLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Uore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. In summary, we wish to highlight the following:\\ 
-\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
-\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
-\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\ 
-\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
-\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
-\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
-\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum.\\
-text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum.
+At present, people usually use some convolutional neural network (CNN)-based methods for electroencephalogram (EEG) decoding. However, CNNs have limitations in perceiving global dependencies, which is insufficient for the common EEG paradigm with strong overall relationships. The EEG decoding method we proposed mainly relies on the attention mechanism. The EEG data is first preprocessed and spatially filtered. Then, we apply attention transformation on the feature channel dimension so that the model can enhance more relevant spatial features. The most critical step is to slice the data in the time dimension for attention conversion, and finally get a highly distinguishable representation. At this time, use global average pooling and a simple fully connected layer to classify different types of EEG data. Our model considers the spatial characteristics and timing of EEG signals on the basis of Convolutional Neural Network (CNN), and this is indeed an advantage of the proposed model.
+   Although this study is based on a limited number of EEG signals obtained from 30 subjects (15 normal subjects and 15 depressed subjects), the proposed algorithm achieves a 90\% accuracy rate and takes into account The spatial characteristics and timing of EEG signals. The proposed model can be used as a tool to objectively diagnose depression using EEG signals. In current clinical practice, the diagnosis of depression is based on questionnaire surveys and the patient's physical emotions. In addition, the system can be used remotely by non-professional clinicians. Once the EEG signals are obtained from the patient, they will be sent to a server in the cloud (located in the hospital), where the proposed CNN model can be used for diagnosis. The diagnosis result can be sent to the clinic immediately, as a reference for the diagnosis of professional clinicians.\\
+
+%\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
+%\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
+%\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\ 
+%\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
+%\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
+%\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum;\\
+%\hspace{0.1cm}$\circ$ text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum.\\
+%text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum.
 %----------------------------------------------------------------------------------------
-%	ACKNOWLEDGEMENTS
+%	REFERENCE
 %----------------------------------------------------------------------------------------
-\section*{Acknowledgments}
-\tiny \textnormal{This research was undertaken text is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorumtext is derived from sections 1.10.33 of Cicero's De finibus bonorum et malorum.}
+\section*{Reference}
+\tiny \textnormal{1. Institute of Health Metrics and Evaluation. Global Health Data Exchange (GHDx).  http://ghdx.healthdata.org/gbd-results-tool?params=gbd-api-2019-permalink/d780dffbe8a381b25e1416884959e88b (Accessed 1 May 2021).}
+\tiny \textnormal{2. }
 \end{multicols}
 %\textcolor{Orange}{\rule{\linewidth}{15pt}}
 \vspace{0.5cm}
